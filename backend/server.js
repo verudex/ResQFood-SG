@@ -30,7 +30,7 @@ try {
   process.exit(1);
 }
 
-const allowedOrigins = ['http://localhost:5173'];
+const allowedOrigins = ['http://localhost:5173', 'https://resqfood-d3b3zvptv-verudex.vercel.app'];
 
 app.use(helmet());
 app.use(
