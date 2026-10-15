@@ -3,11 +3,32 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
+const fs = require('fs');
+const path = require('path');
 const connectDB = require('./config/db');
 
 connectDB();
 
 const app = express();
+
+// Loaded once at startup and shared read-only via app.locals, so request
+// handlers never touch the filesystem. Fail fast if it is missing or invalid.
+try {
+  const knowledgeBase = JSON.parse(
+    fs.readFileSync(
+      path.join(__dirname, 'config', 'embedded-chunks.json'),
+      'utf8'
+    )
+  );
+  if (!Array.isArray(knowledgeBase)) {
+    throw new Error('embedded-chunks.json must contain an array');
+  }
+  app.locals.knowledgeBase = knowledgeBase;
+  console.log(`Knowledge base loaded: ${knowledgeBase.length} chunks`);
+} catch (error) {
+  console.error(`Knowledge base load failed: ${error.message}`);
+  process.exit(1);
+}
 
 const allowedOrigins = ['http://localhost:5173'];
 
@@ -28,6 +49,8 @@ app.use(express.json({ limit: '10kb' }));
 app.use('/api/auth', require('./routes/authRoutes'));
 
 app.use('/api/donations', require('./routes/donationRoutes'));
+
+app.use('/api/qa', require('./routes/ragRoutes'));
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
