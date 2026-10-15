@@ -4,6 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import SingpassButton from './components/SingpassButton'
 import DonationParser from './components/DonationParser'
+import RagQuery from './components/RagQuery'
 import './App.css'
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         </button>
         <SingpassButton />
         <DonationParser />
+        <RagQuery />
       </section>
 
       <div className="ticks"></div>
