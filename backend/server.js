@@ -30,7 +30,18 @@ try {
   process.exit(1);
 }
 
-const allowedOrigins = ['http://localhost:5173', 'https://resqfood-d3b3zvptv-verudex.vercel.app'];
+// Explicit origins only (no wildcards). Further origins, such as a custom
+// domain or preview deployment, can be added via ALLOWED_ORIGINS as a
+// comma-separated list without a code change.
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://resqfood-sg.vercel.app',
+  'https://resqfood-d3b3zvptv-verudex.vercel.app',
+  ...(process.env.ALLOWED_ORIGINS || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+];
 
 app.use(helmet());
 app.use(
