@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { API_BASE_URL } from '../config';
 
-const API_URL = 'http://localhost:5000/api/donations/parse';
+const API_URL = `${API_BASE_URL}/api/donations/parse`;
 
 const PRIORITY_STYLES = {
   low: 'bg-green-100 text-green-800',

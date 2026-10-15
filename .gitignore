@@ -147,3 +147,8 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# sfa-manual files
+backend/config/sfa-manual-raw.txt
+backend/config/sfa-manual.pdf
+backend/config/chunks.json
