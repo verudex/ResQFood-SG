@@ -74,9 +74,5 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-<<<<<<< HEAD
   console.log(`🚀 Server started successfully on port ${PORT}`);
-=======
-  console.log(`✅ ResQFood backend is live on port ${PORT}`);
->>>>>>> main
 });
